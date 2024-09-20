@@ -8,7 +8,7 @@ import (
 type set[T comparable] map[T]struct{}
 
 /*
-Instantiates a new Set 
+Instantiates a new Set
 */
 func Set[T comparable](members ...T) set[T] {
 	s := make(set[T])
@@ -77,7 +77,7 @@ func (A set[T]) IsSubsetOf(B set[T]) bool {
 /*
 Whether or not the set is a proper subset of argument
 
-Set A is a proper subset of B if every element of 
+Set A is a proper subset of B if every element of
 A is contained in B, and B has at least one element
 not contained within A
 
@@ -115,7 +115,7 @@ func (A set[T]) IsProperSupersetOf(B set[T]) bool {
 /*
 Whether or not two sets are equal
 
-Set A is equal to set B if they contain all of 
+Set A is equal to set B if they contain all of
 each other's members and are of the same size
 
 Returns A = B
@@ -130,13 +130,18 @@ func (A set[T]) Union(B set[T]) set[T] {
 	A.ForEach(func(member T) {
 		C.Add(member)
 	})
-	B.ForEach(func(member T)) {
+
+	B.ForEach(func(member T) {
 		C.Add(member)
-	}
+	})
 
 	return C
 }
 
+/*
+* Iterates over the set members
+* and calls the provided function
+ */
 func (A set[T]) ForEach(do func(member T)) {
 	for member := range A {
 		do(member)
@@ -160,7 +165,7 @@ Converts the set to its string representation
 */
 func (s set[t]) String() string {
 	var members []string
-	for key, _ := range s {
+	for key := range s {
 		members = append(members, fmt.Sprintf("%v", key))
 	}
 	return "{ " + strings.Join(members, ", ") + " }"
