@@ -113,17 +113,19 @@ func (A set[T]) IsProperSupersetOf(B set[T]) bool {
 }
 
 /*
-Whether or not two sets are equal
-
-Set A is equal to set B if they contain all of
-each other's members and are of the same size
-
-Returns A = B
-*/
+* The equality of two sets
+*
+* Returns A = B
+ */
 func (A set[T]) Equals(B set[T]) bool {
 	return A.IsProperSubsetOf(B) && B.Size() == A.Size()
 }
 
+/*
+* The union of two sets
+*
+* Returns A ∪ B
+ */
 func (A set[T]) Union(B set[T]) set[T] {
 	C := Set[T]()
 
@@ -139,7 +141,32 @@ func (A set[T]) Union(B set[T]) set[T] {
 }
 
 /*
-* Iterates over the set members
+* The intersection of two sets
+*
+* Returns A ∩ B
+ */
+func (A set[T]) Intersection(B set[T]) set[T] {
+	C := Set[T]()
+
+	if A.Size() > B.Size() {
+		B.ForEach(func(member T) {
+			if A.Has(member) {
+				C.Add(member)
+			}
+		})
+	} else {
+		A.ForEach(func(member T) {
+			if B.Has(member) {
+				C.Add(member)
+			}
+		})
+	}
+
+	return C
+}
+
+/*
+* Iterates over the unordered set members
 * and calls the provided function
  */
 func (A set[T]) ForEach(do func(member T)) {
@@ -149,8 +176,8 @@ func (A set[T]) ForEach(do func(member T)) {
 }
 
 /*
-Converts the set to an unordered list
-*/
+* Converts the set to an array of members
+ */
 func (s set[T]) Array() []T {
 	var members []T
 	for member := range s {
@@ -161,8 +188,9 @@ func (s set[T]) Array() []T {
 }
 
 /*
-Converts the set to its string representation
-*/
+* Converts the set to a string
+* of the form { a, b, c }
+ */
 func (s set[t]) String() string {
 	var members []string
 	for key := range s {
