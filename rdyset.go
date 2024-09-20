@@ -166,6 +166,23 @@ func (A set[T]) Intersection(B set[T]) set[T] {
 }
 
 /*
+* The difference of two sets
+*
+* Returns A ∖ B
+ */
+func (A set[T]) Difference(B set[T]) set[T] {
+	C := Set[T]()
+
+	A.ForEach(func(member T) {
+		if !B.Has(member) {
+			C.Add(member)
+		}
+	})
+
+	return C
+}
+
+/*
 * Iterates over the unordered set members
 * and calls the provided function
  */
