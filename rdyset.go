@@ -183,6 +183,17 @@ func (A set[T]) Difference(B set[T]) set[T] {
 }
 
 /*
+* The symmetric difference of two sets
+*
+* Returns A Δ B
+ */
+func (A set[T]) SymmetricDifference(B set[T]) set[T] {
+	C := A.Difference(B)
+	D := B.Difference(A)
+	return C.Union(D)
+}
+
+/*
 * Iterates over the unordered set members
 * and calls the provided function
  */
@@ -190,6 +201,33 @@ func (A set[T]) ForEach(do func(member T)) {
 	for member := range A {
 		do(member)
 	}
+}
+
+/*
+* Returns a set of members that meet
+* condition using provided function
+ */
+func (A set[T]) Filter(do func(member T) bool) set[T] {
+	C := Set[T]()
+
+	A.ForEach(func(a T) {
+		if do(a) {
+			C.Add(a)
+		}
+	})
+
+	return C
+}
+
+func (A set[T]) Map(do func(member T) T) set[T] {
+	C := Set[T]()
+
+	A.ForEach(func(a T) {
+		c := do(a)
+		C.Add(c)
+	})
+
+	return C
 }
 
 /*
