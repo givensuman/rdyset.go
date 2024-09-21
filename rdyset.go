@@ -12,9 +12,7 @@ Instantiates a new Set
 */
 func Set[T comparable](members ...T) set[T] {
 	s := make(set[T])
-	for _, member := range members {
-		s.Add(member)
-	}
+	s.Add(members...)
 
 	return s
 }
@@ -24,8 +22,10 @@ Adds a new member to the set
 
 Ensures a ∈ A
 */
-func (A set[T]) Add(member T) {
-	A[member] = struct{}{}
+func (A set[T]) Add(members ...T) {
+	for _, member := range members {
+		A[member] = struct{}{}
+	}
 }
 
 /*
@@ -118,7 +118,7 @@ func (A set[T]) IsProperSupersetOf(B set[T]) bool {
 * Returns A = B
  */
 func (A set[T]) Equals(B set[T]) bool {
-	return A.IsProperSubsetOf(B) && B.Size() == A.Size()
+	return A.IsSubsetOf(B) && B.IsSubsetOf(A)
 }
 
 /*
