@@ -301,19 +301,6 @@ func TestFilter(t *testing.T) {
 	}
 }
 
-func TestMap(t *testing.T) {
-	fmt.Println("Testing Map()...")
-	var expect bool
-	s := Set(1, 2, 3)
-
-	expect = s.Map(func(k int) int {
-		return k * k
-	}).Equals(Set(1, 4, 9))
-	if !expect {
-		t.Fatalf("Fails expectation s.Map(...).Equals(Set(1, 4, 9)): %v", s.String())
-	}
-}
-
 func TestArray(t *testing.T) {
 	fmt.Println("Testing Array()...")
 	s := Set(1, 2, 3)

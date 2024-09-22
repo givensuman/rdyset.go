@@ -236,17 +236,6 @@ func (A set[T]) Filter(do func(member T) bool) set[T] {
 	return C
 }
 
-func (A set[T]) Map(do func(member T) T) set[T] {
-	C := Set[T]()
-
-	A.ForEach(func(a T) {
-		c := do(a)
-		C.Add(c)
-	})
-
-	return C
-}
-
 /*
 Converts the set to an array of its members
  */
