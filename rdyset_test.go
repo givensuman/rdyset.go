@@ -301,8 +301,8 @@ func TestFilter(t *testing.T) {
 	}
 }
 
-func TestArray(t *testing.T) {
-	fmt.Println("Testing Array()...")
+func TestSlice(t *testing.T) {
+	fmt.Println("Testing Slice()...")
 	s := Set(1, 2, 3)
 
 	contains := func(s []int, e int) bool {
@@ -316,7 +316,7 @@ func TestArray(t *testing.T) {
 	}
 
 	members := []int{ 1, 2, 3 }
-	s_array := s.Array()
+	s_array := s.Slice()
 
 	s.ForEach(func (member int) {
 		if !contains(members, member) {

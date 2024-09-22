@@ -237,9 +237,9 @@ func (A set[T]) Filter(do func(member T) bool) set[T] {
 }
 
 /*
-Converts the set to an array of its members
+Converts the set to a slice of its members
  */
-func (s set[T]) Array() []T {
+func (s set[T]) Slice() []T {
 	var members []T
 	for member := range s {
 		members = append(members, member)
